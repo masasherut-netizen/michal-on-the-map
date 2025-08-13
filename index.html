@@ -367,7 +367,16 @@
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                font-size: 0.85em;
+                justify-content: center;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
             }
             
             .main-title {
@@ -400,7 +409,7 @@
         <div class="nav-container">
             <div class="nav-logo-text">מיכל על המפה</div>
             <ul class="nav-links">
-                <li><a href="about.html">מי אני</a></li>
+                <li><a href="#about">מי אני</a></li>
                 <li><a href="#services">השירותים</a></li>
                 <li><a href="#trips">טיולים</a></li>
                 <li><a href="#recommendations">המלצות</a></li>
@@ -472,7 +481,7 @@
                     <p>שלום, אני מיכל - מדריכת טיולים מקצועית עם שנים של ניסיון בהדרכה בארץ ובעולם.</p>
                     <p>אני מתמחה בבניית חוויות טיול ייחודיות ומותאמות אישית, ואוהבת לחלוק את התשוקה שלי לגילוי מקומות חדשים ומרתקים.</p>
                     <p>בין אם אתם מחפשים הרפתקה, נופש מרגיע, או חוויה תרבותית - אני כאן לעזור לכם ליצור זיכרונות שיישארו איתכם לתמיד.</p>
-                    <a href="#contact" class="cta-button">בואו נכיר</a>
+                    <a href="about.html" class="cta-button">קרא עוד עלי</a>
                 </div>
             </div>
         </div>
