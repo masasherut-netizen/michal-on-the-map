@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ההמלצות שלי - מיכל על המפה</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #00b4db 100%);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,180,219,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/><stop offset="100%" style="stop-color:rgba(255,255,255,0)"/></radialGradient></defs><circle cx="10" cy="10" r="3" fill="url(%23g)"/><circle cx="30" cy="15" r="2" fill="url(%23g)"/><circle cx="60" cy="8" r="4" fill="url(%23g)"/><circle cx="85" cy="12" r="2.5" fill="url(%23g)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-logo-text {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+            font-weight: 600;
+        }
+
+        /* Recommendations Header */
+        .recommendations-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            padding: 80px 20px 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .recommendations-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            display: inline-block;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 1em;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            transform: translateX(-3px);
+        }
+
+        .recommendations-title {
+            font-size: 3.2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .recommendations-subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-style: italic;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #8b4513;
+            font-size: 1.1em;
+        }
+
+        .filter-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Recommendations Content */
+        .recommendations-section {
+            padding: 0 20px 100px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #5d4037;
+            margin-bottom: 50px;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(139, 69, 19, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(139, 69, 19, 0.3);
+        }
+
+        .recommendation-video {
+            width: 100%;
+            height: 280px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .recommendation-video:hover {
+            transform: scale(1.05);
+        }
+
+        .video-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: #666;
+            text-align: center;
+        }
+
+        .play-button {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5em;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .play-button::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 50%;
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .recommendation-content {
+            padding: 30px;
+        }
+
+        .recommendation-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            z-index: 3;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            animation: badge-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes badge-glow {
+            0% { box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); }
+            100% { box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6); }
+        }
+
+        .recommendation-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-location {
+            font-size: 1.1em;
+            color: #d2691e;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .recommendation-description {
+            color: #5d4037;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 1em;
+        }
+
+        .recommendation-features {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .feature-tag {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(238, 90, 82, 0.1));
+            color: #8b4513;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .recommendation-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1em;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            text-align: center;
+        }
+
+        .newsletter-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 15px 50px rgba(168, 237, 234, 0.3);
+        }
+
+        .newsletter-title {
+            font-size: 2.2em;
+            color: #2c5aa0;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-text {
+            font-size: 1.1em;
+            color: #4a5568;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .newsletter-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Filter Categories */
+        .category-section {
+            margin-bottom: 80px;
+        }
+
+        .category-section.hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                font-size: 0.85em;
+                justify-content: center;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .recommendations-title {
+                font-size: 2.5em;
+            }
+
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .filter-tabs {
+                gap: 10px;
+            }
+
+            .filter-tab {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            .recommendation-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo-text">מיכל על המפה</div>
+            <ul class="nav-links">
+                <li><a href="index.html">בית</a></li>
+                <li><a href="about.html">מי אני</a></li>
+                <li><a href="#services">השירותים</a></li>
+                <li><a href="trips.html">טיולים</a></li>
+                <li><a href="recommendations.html" class="active">המלצות</a></li>
+                <li><a href="#testimonials">המלצות מטיילים</a></li>
+                <li><a href="#blog">בלוג</a></li>
+                <li><a href="contact.html">צור קשר</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Recommendations Header -->
+    <div class="recommendations-header">
+        <div class="container">
+            <a href="index.html" class="back-button">← חזרה לדף הבית</a>
+        </div>
+        <h1 class="recommendations-title">ההמלצות שלי</h1>
+        <p class="recommendations-subtitle">המקומות הכי שווים שגיליתי בשבילכם</p>
+    </div>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <div class="filter-tab active" onclick="showCategory('all', this)">🌟 כל ההמלצות</div>
+                <div class="filter-tab" onclick="showCategory('coffee', this)">☕ קפה ומאפיות</div>
+                <div class="filter-tab" onclick="showCategory('restaurants', this)">🍽️ מסעדות</div>
+                <div class="filter-tab" onclick="showCategory('nature', this)">🌲 טיולי טבע</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Content -->
+    <section class="recommendations-section">
+        <div class="container">
+            <!-- Coffee Category -->
+            <div class="category-section" id="coffee">
+                <h2 class="section-title">☕ קפה ומאפיות</h2>
+                <p class="section-subtitle">המקומות הכי טעימים לקפה וחוויה</p>
+
+                <div class="recommendations-grid">
+                    <!-- קפה לאגו פתח תקווה -->
+                    <div class="recommendation-card">
+                        <div class="recommendation-badge">המלצה חמה!</div>
+                        <div class="recommendation-video" onclick="openVideo('https://youtu.be/0Nw2NlLbWeY?si=4yxvr9r-ixJBOjne')">
+                            <div class="video-placeholder">
+                                <div class="play-button">▶️</div>
+                                <p><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p>קפה לאגו בפתח תקווה</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">קפה לאגו</h3>
+                            <p class="recommendation-location">📍 פתח תקווה - אזור המרכז</p>
+                            <p class="recommendation-description">מקום מושלם לקפה איכותי באווירה נעימה. האמת שגיליתי פה פינה קטנה וחמימה שהפכה למועדף עלי!</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">קפה איכותי</span>
+                                <span class="feature-tag">אווירה נעימה</span>
+                                <span class="feature-tag">שירות מעולה</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! ראיתי את ההמלצה על קפה לאגו, איך מגיעים?" class="action-btn btn-primary">איך מגיעים?</a>
+                                <a href="https://youtu.be/0Nw2NlLbWeY?si=4yxvr9r-ixJBOjne" target="_blank" class="action-btn btn-secondary">צפייה בסרטון</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- עגלת קפה קרני חיטין טבריה -->
+                    <div class="recommendation-card">
+                        <div class="recommendation-badge">גם מיוחד!</div>
+                        <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/3P_rAzqC1EU?si=CQvYdVK9poKKuMSJ')">
+                            <div class="video-placeholder">
+                                <div class="play-button">▶️</div>
+                                <p><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p>עגלת קפה קרני חיטין</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">עגלת קפה קרני חיטין</h3>
+                            <p class="recommendation-location">📍 טבריה - אזור הצפון</p>
+                            <p class="recommendation-description">עגלת קפה מקסימה עם נוף מדהים! המקום הזה יתן לכם חוויה אמיתית של קפה בצפון.</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">נוף מדהים</span>
+                                <span class="feature-tag">עגלת קפה</span>
+                                <span class="feature-tag">אזור הצפון</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! מעניין אותי המקום בטבריה עם עגלת הקפה" class="action-btn btn-primary">ספרי עוד</a>
+                                <a href="https://youtube.com/shorts/3P_rAzqC1EU?si=CQvYdVK9poKKuMSJ" target="_blank" class="action-btn btn-secondary">צפייה בסרטון</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- בית קפה החורשה -->
+                    <div class="recommendation-card">
+                        <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/3P_rAzqC1EU?si=6ZXgZQ6vLgg4Gp6h')">
+                            <div class="video-placeholder">
+                                <div class="play-button">▶️</div>
+                                <p><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p>בית קפה החורשה</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">בית קפה החורשה</h3>
+                            <p class="recommendation-location">📍 מושב חמד - אזור המרכז</p>
+                            <p class="recommendation-description">בית קפה במושב חמד שמציע חוויה כפרית אמיתית. מקום שקט ונעים לבילוי איכותי.</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">אווירה כפרית</span>
+                                <span class="feature-tag">שקט ונעים</span>
+                                <span class="feature-tag">חוויה ייחודית</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! רוצה לשמוע על בית הקפה במושב חמד" class="action-btn btn-primary">פרטים נוספים</a>
+                                <a href="https://youtube.com/shorts/3P_rAzqC1EU?si=6ZXgZQ6vLgg4Gp6h" target="_blank" class="action-btn btn-secondary">צפייה בסרטון</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- עגלת קפה עין חמד -->
+                    <div class="recommendation-card">
+                        <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/6b9oLpZhh6s?si=6ghsy23aUWPCwdyl')">
+                            <div class="video-placeholder">
+                                <div class="play-button">▶️</div>
+                                <p><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p>עגלת קפה רחוב ירושלמי</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">עגלת קפה רחוב ירושלמי</h3>
+                            <p class="recommendation-location">📍 שמורת עין חמד - אזור המרכז</p>
+                            <p class="recommendation-description">עגלת קפה בשמורת עין חמד שמשלבת טבע וקפה איכותי. המקום הזה פשוט מושלם!</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">בתוך שמורת טבע</span>
+                                <span class="feature-tag">עגלת קפה</span>
+                                <span class="feature-tag">שילוב טבע וקפה</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! איך מוצאים את העגלה בשמורת עין חמד?" class="action-btn btn-primary">איך מוצאים?</a>
+                                <a href="https://youtube.com/shorts/6b9oLpZhh6s?si=6ghsy23aUWPCwdyl" target="_blank" class="action-btn btn-secondary">צפייה בסרטון</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nature Category -->
+            <div class="category-section" id="nature">
+                <h2 class="section-title">🌲 טיולי טבע</h2>
+                <p class="section-subtitle">מקומות טבע מדהימים שכדאי להכיר</p>
+
+                <div class="recommendations-grid">
+                    <!-- פארק הדרים רחובות -->
+                    <div class="recommendation-card">
+                        <div class="recommendation-badge">חובה לבקר!</div>
+                        <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/vi7q7jUPJ5w?si=Em_234VUQm89K2CX')">
+                            <div class="video-placeholder">
+                                <div class="play-button">▶️</div>
+                                <p><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p>פארק הדרים ברחובות</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">פארק הדרים</h3>
+                            <p class="recommendation-location">📍 רחובות - אזור המרכז</p>
+                            <p class="recommendation-description">פארק מדהים עם עצי הדר ונוף פסטורלי. המקום הזה פשוט מושלם לטיול משפחתי או לבילוי רומנטי.</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">מתאים למשפחות</span>
+                                <span class="feature-tag">נוף יפהפה</span>
+                                <span class="feature-tag">עצי הדר</span>
+                                <span class="feature-tag">טיול קל</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! רוצה לשמוע עוד על פארק הדרים ברחובות" class="action-btn btn-primary">ספרי עוד</a>
+                                <a href="https://youtube.com/shorts/vi7q7jUPJ5w?si=Em_234VUQm89K2CX" target="_blank" class="action-btn btn-secondary">צפייה בסרטון</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- מקומות נוספים בתכנון -->
+                    <div class="recommendation-card" style="opacity: 0.7;">
+                        <div class="recommendation-badge" style="background: #666;">בקרוב!</div>
+                        <div class="recommendation-video">
+                            <div class="video-placeholder">
+                                <div class="play-button" style="background: #888;">🌿</div>
+                                <p><strong>המלצות נוספות בקרוב</strong></p>
+                                <p>מקומות טבע נוספים</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">עוד המלצות טבע</h3>
+                            <p class="recommendation-location">📍 כל הארץ</p>
+                            <p class="recommendation-description">אני כל הזמן מגלה מקומות חדשים ומדהימים! בקרוב אשתף אתכם בעוד המלצות על מקומות טבע מיוחדים.</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">בקרוב</span>
+                                <span class="feature-tag">המלצות חמות</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! איזה מקומות טבע את ממליצה עליהם?" class="action-btn btn-primary">יש לך המלצות?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurants Category -->
+            <div class="category-section" id="restaurants">
+                <h2 class="section-title">🍽️ מסעדות</h2>
+                <p class="section-subtitle">המלצות קולינריות שכדאי להכיר</p>
+
+                <div class="recommendations-grid">
+                    <div class="recommendation-card" style="opacity: 0.7;">
+                        <div class="recommendation-badge" style="background: #666;">בהכנה</div>
+                        <div class="recommendation-video">
+                            <div class="video-placeholder">
+                                <div class="play-button" style="background: #888;">🍴</div>
+                                <p><strong>המלצות מסעדות בקרוב</strong></p>
+                                <p>המקומות הכי טעימים</p>
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <h3 class="recommendation-title">המלצות מסעדות</h3>
+                            <p class="recommendation-location">📍 בכל הארץ</p>
+                            <p class="recommendation-description">אני אוהבת לגלות מסעדות מיוחדות ומקומות קולינריים חדשים. בקרוב אשתף אתכם בהמלצות הכי טעימות!</p>
+                            <div class="recommendation-features">
+                                <span class="feature-tag">בהכנה</span>
+                                <span class="feature-tag">קולינריה מיוחדת</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <a href="https://wa.me/972542347834?text=היי מיכל! יש לך המלצה על מסעדה טובה?" class="action-btn btn-primary">המלצי על מסעדה</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-card">
+                <h3 class="newsletter-title">💡 יש לכם המלצות?</h3>
+                <p class="newsletter-text">גיליתם מקום מיוחד שכדאי שכולם יכירו? שלחו לי! אני תמיד מחפשת מקומות חדשים ומעניינים להמליץ עליהם.</p>
+                <a href="https://wa.me/972542347834?text=היי מיכל! יש לי המלצה על מקום מעולה שכדאי שתכירי!" class="newsletter-btn">שלחו המלצה</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function openVideo(url) {
+            window.open(url, '_blank');
+        }
+
+        function showCategory(category, clickedElement) {
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+            }
+
+            // Show/hide categories
+            const categories = document.querySelectorAll('.category-section');
+            categories.forEach(section => {
+                if (category === 'all') {
+                    section.classList.remove('hidden');
+                } else if (section.id === category) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize with all categories visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const allTab = document.querySelector('.filter-tab.active');
+            showCategory('all', allTab);
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
