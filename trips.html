@@ -17,31 +17,19 @@
             color: #333;
             background: #f8f9fa;
             overflow-x: hidden;
+            padding-top: 80px; /* Space for fixed navbar */
         }
 
-        /* Header & Navigation */
+        /* Fixed Header & Navigation */
         .navbar {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #00b4db 100%);
-            padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0,180,219,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .navbar::before {
-            content: '';
-            position: absolute;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e4176 100%);
+            padding: 16px 0;
+            box-shadow: 0 2px 20px rgba(44, 90, 160, 0.15);
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/><stop offset="100%" style="stop-color:rgba(255,255,255,0)"/></radialGradient></defs><circle cx="10" cy="10" r="3" fill="url(%23g)"/><circle cx="30" cy="15" r="2" fill="url(%23g)"/><circle cx="60" cy="8" r="4" fill="url(%23g)"/><circle cx="85" cy="12" r="2.5" fill="url(%23g)"/></svg>') repeat;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100px); }
+            z-index: 1000;
         }
 
         .nav-container {
@@ -51,42 +39,90 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            position: relative;
-            z-index: 2;
         }
 
         .nav-logo-text {
             color: white;
             font-weight: 700;
-            font-size: 1.3em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.4em;
+            letter-spacing: -0.5px;
         }
 
-        .nav-links {
+        .nav-center {
             display: flex;
-            gap: 35px;
+            gap: 40px;
             list-style: none;
         }
 
-        .nav-links a {
-            color: white;
+        .nav-center a {
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             padding: 8px 16px;
-            border-radius: 20px;
-            position: relative;
+            border-radius: 6px;
+            font-size: 0.95em;
         }
 
-        .nav-links a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        .nav-center a:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
         }
 
-        .nav-links a.active {
+        .nav-center a.active {
             background: rgba(255,255,255,0.2);
             font-weight: 600;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-cta:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background: #128c7e;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            color: white;
+            text-decoration: none;
         }
 
         /* Trips Header */
@@ -171,7 +207,7 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Trips Content */
+        /* Rest of the styles remain the same as original */
         .trips-section {
             padding: 100px 20px;
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
@@ -336,7 +372,7 @@
 
         .trip-highlights li::before {
             content: "✓";
-            background: linear-gradient(45ff, #ff6b6b, #ee5a52);
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
             color: white;
             width: 20px;
             height: 20px;
@@ -457,17 +493,23 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                font-size: 0.85em;
-                justify-content: center;
+            body {
+                padding-top: 120px;
             }
-            
+
             .nav-container {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
+            }
+
+            .nav-center {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            .nav-cta {
+                order: -1;
             }
             
             .trips-title {
@@ -490,22 +532,30 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Fixed Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo-text">מיכל על המפה</div>
-            <ul class="nav-links">
+            <ul class="nav-center">
                 <li><a href="index.html">בית</a></li>
                 <li><a href="about.html">מי אני</a></li>
                 <li><a href="#services">השירותים</a></li>
                 <li><a href="trips.html" class="active">טיולים</a></li>
-                <li><a href="#recommendations">המלצות</a></li>
+                <li><a href="recommendations.html">המלצות</a></li>
                 <li><a href="#testimonials">המלצות מטיילים</a></li>
                 <li><a href="#blog">בלוג</a></li>
-                <li><a href="contact.html">צור קשר</a></li>
             </ul>
+            <a href="contact.html" class="nav-cta">
+                <span>נתכנן יחד</span>
+                <span>→</span>
+            </a>
         </div>
     </nav>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/972542347834" class="whatsapp-float" target="_blank">
+        💬
+    </a>
 
     <!-- Trips Header -->
     <div class="trips-header">
