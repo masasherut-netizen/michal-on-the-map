@@ -16,14 +16,14 @@
             line-height: 1.6;
             color: #2c3e50;
             background: #ffffff;
-            padding-top: 80px; /* Space for fixed navbar */
+            padding-top: 70px; /* Space for compact navbar */
         }
 
-        /* Fixed Header & Navigation */
+        /* Compact Fixed Header & Navigation */
         .navbar {
             background: linear-gradient(135deg, #2c5aa0 0%, #1e4176 100%);
-            padding: 16px 0;
-            box-shadow: 0 2px 20px rgba(44, 90, 160, 0.15);
+            padding: 12px 0;
+            box-shadow: 0 2px 15px rgba(44, 90, 160, 0.15);
             position: fixed;
             top: 0;
             left: 0;
@@ -40,32 +40,36 @@
             padding: 0 20px;
         }
 
-        .nav-logo-text {
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             color: white;
+            text-decoration: none;
+        }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-brand-text {
             font-weight: 700;
-            font-size: 1.4em;
+            font-size: 1.2em;
             letter-spacing: -0.5px;
         }
 
-        .nav-center {
+        .nav-actions {
             display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-center a {
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.95em;
-        }
-
-        .nav-center a:hover {
-            color: white;
-            background: rgba(255,255,255,0.1);
+            align-items: center;
+            gap: 15px;
         }
 
         .nav-cta {
@@ -74,11 +78,11 @@
             gap: 8px;
             background: rgba(255,255,255,0.1);
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 8px 18px;
+            border-radius: 20px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 0.9em;
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
         }
@@ -88,6 +92,66 @@
             transform: translateY(-1px);
             color: white;
             text-decoration: none;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e4176 100%);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(44, 90, 160, 0.3);
+        }
+
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+
+        .mobile-menu-list {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-menu-list li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-list a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 0;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-list a:hover {
+            color: #87ceeb;
+            padding-right: 10px;
         }
 
         /* WhatsApp Floating Button */
@@ -101,7 +165,7 @@
             color: white;
             border-radius: 50px;
             text-align: center;
-            font-size: 30px;
+            font-size: 28px;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             z-index: 1000;
             display: flex;
@@ -193,37 +257,174 @@
             text-decoration: none;
         }
 
-        /* Stats Section */
-        .stats-section {
+        /* Trips Carousel Section */
+        .trips-carousel-section {
             background: white;
-            padding: 60px 20px;
+            padding: 80px 20px;
             border-bottom: 1px solid #e8f0fe;
         }
 
-        .stats-container {
-            max-width: 1000px;
+        .carousel-container {
+            max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+        }
+
+        .carousel-title {
             text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
             font-size: 2.5em;
             font-weight: 700;
             color: #2c5aa0;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
 
-        .stat-label {
-            font-size: 1em;
+        .carousel-subtitle {
+            text-align: center;
+            font-size: 1.2em;
             color: #5a6c7d;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(44, 90, 160, 0.1);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .trip-slide {
+            min-width: 100%;
+            background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            /* This is where background images will be placed */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .trip-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 90, 160, 0.8);
+            z-index: 1;
+        }
+
+        .trip-slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .trip-slide-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .trip-slide-date {
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            opacity: 0.9;
             font-weight: 500;
+        }
+
+        .trip-slide-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .trip-slide-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .trip-slide-cta:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            color: #2c5aa0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 3;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        /* Carousel Indicators */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(44, 90, 160, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: #2c5aa0;
+            transform: scale(1.2);
         }
 
         /* Services Section */
@@ -512,22 +713,29 @@
         /* Responsive */
         @media (max-width: 768px) {
             body {
-                padding-top: 120px;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 15px;
+                padding-top: 70px;
             }
 
-            .nav-center {
-                flex-wrap: wrap;
-                gap: 15px;
-                justify-content: center;
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
             }
 
-            .nav-cta {
-                order: -1;
+            .carousel-prev {
+                left: 10px;
+            }
+
+            .carousel-next {
+                right: 10px;
+            }
+
+            .trip-slide {
+                padding: 40px 20px;
+            }
+
+            .trip-slide-title {
+                font-size: 2em;
             }
             
             .main-title {
@@ -564,11 +772,6 @@
                 align-items: center;
             }
 
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-
             .hero-section {
                 padding: 60px 20px;
             }
@@ -576,25 +779,37 @@
     </style>
 </head>
 <body>
-    <!-- Fixed Navigation -->
+    <!-- Compact Fixed Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo-text">מיכל על המפה</div>
-            <ul class="nav-center">
-                <li><a href="#home">בית</a></li>
-                <li><a href="about.html">מי אני</a></li>
-                <li><a href="#services">השירותים</a></li>
-                <li><a href="trips.html">טיולים</a></li>
-                <li><a href="recommendations.html">המלצות</a></li>
-                <li><a href="#testimonials">המלצות מטיילים</a></li>
-                <li><a href="#blog">בלוג</a></li>
-            </ul>
-            <a href="contact.html" class="nav-cta">
-                <span>נתכנן יחד</span>
-                <span>→</span>
+            <a href="#home" class="nav-brand">
+                <div class="nav-logo">🗺️</div>
+                <span class="nav-brand-text">מיכל על המפה</span>
             </a>
+            
+            <div class="nav-actions">
+                <a href="contact.html" class="nav-cta">
+                    <span>נתכנן יחד</span>
+                    <span>→</span>
+                </a>
+                <button class="hamburger" onclick="toggleMenu()">☰</button>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-list">
+            <li><a href="#home" onclick="closeMenu()">בית</a></li>
+            <li><a href="about.html" onclick="closeMenu()">מי אני</a></li>
+            <li><a href="#services" onclick="closeMenu()">השירותים</a></li>
+            <li><a href="trips.html" onclick="closeMenu()">טיולים</a></li>
+            <li><a href="recommendations.html" onclick="closeMenu()">המלצות</a></li>
+            <li><a href="#testimonials" onclick="closeMenu()">המלצות מטיילים</a></li>
+            <li><a href="#blog" onclick="closeMenu()">בלוג</a></li>
+            <li><a href="contact.html" onclick="closeMenu()">צור קשר</a></li>
+        </ul>
+    </div>
 
     <!-- WhatsApp Float Button -->
     <a href="https://wa.me/972542347834" class="whatsapp-float" target="_blank">
@@ -616,24 +831,78 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-number">5+</div>
-                <div class="stat-label">שנות ניסיון</div>
+    <!-- Trips Carousel Section -->
+    <section class="trips-carousel-section">
+        <div class="carousel-container">
+            <h2 class="carousel-title">הטיולים הקרובים</h2>
+            <p class="carousel-subtitle">הזדמנויות מיוחדות למסעות בלתי נשכחים</p>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slide 1 - Vietnam -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">ויאטנם המדהימה</h3>
+                            <p class="trip-slide-date">25 בנובמבר 2025 - שבועיים</p>
+                            <p class="trip-slide-description">מסע מרתק בין צפון לדרום ויאטנם, עם כל האטרקציות החובה, מלונות איכותיים ובהדרכה של מיכל. קבוצה טובה ומגובשת מחכה לכם!</p>
+                            <a href="https://wa.me/972542347834?text=היי מיכל! אני מעוניין בטיול לויאטנם ב-25.11.25" class="trip-slide-cta">
+                                <span>רוצה להצטרף</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 - Bulgaria (Sold Out) -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">בולגריה הקסומה</h3>
+                            <p class="trip-slide-date">יולי 2025 - מלא!</p>
+                            <p class="trip-slide-description">הטיול המדהים לבולגריה התמלא! שבוע מלא של הרפתקאות בהרי הבלקן המרהיבים עם תרבות עשירה וקולינריה מיוחדת.</p>
+                            <a href="https://wa.me/972542347834?text=היי מיכל! רוצה לקבל עדכונים על טיולים דומים לבולגריה" class="trip-slide-cta">
+                                <span>עדכנו אותי על הבא</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 - Winter Trip -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">טיול חורף מיוחד</h3>
+                            <p class="trip-slide-date">פברואר 2026</p>
+                            <p class="trip-slide-description">יעד חורפי מפתיע ומדהים עם חוויות ייחודיות לעונה. כל הפרטים יתפרסמו בקרוב. בהדרכה של מיכל.</p>
+                            <a href="https://wa.me/972542347834?text=היי מיכל! רוצה לקבל עדכונים על הטיול החורפי" class="trip-slide-cta">
+                                <span>רוצה עדכונים</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 - Passover Trip -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">טיול פסח מיוחד</h3>
+                            <p class="trip-slide-date">אפריל 2026 - חופש פסח</p>
+                            <p class="trip-slide-description">חופשת פסח בלתי נשכחת ביעד מושלם לכל המשפחה. תכנון מותאם לחגים בהדרכה של מיכל.</p>
+                            <a href="https://wa.me/972542347834?text=היי מיכל! מעניין אותי טיול פסח 2026" class="trip-slide-cta">
+                                <span>רוצה פרטים</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Navigation -->
+                <button class="carousel-nav carousel-prev" onclick="previousSlide()">‹</button>
+                <button class="carousel-nav carousel-next" onclick="nextSlide()">›</button>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">200+</div>
-                <div class="stat-label">מטיילים מרוצים</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">יעדים בעולם</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">שביעות רצון</div>
+
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <div class="carousel-indicator active" onclick="goToSlide(0)"></div>
+                <div class="carousel-indicator" onclick="goToSlide(1)"></div>
+                <div class="carousel-indicator" onclick="goToSlide(2)"></div>
+                <div class="carousel-indicator" onclick="goToSlide(3)"></div>
             </div>
         </div>
     </section>
@@ -794,6 +1063,48 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.remove('open');
+        }
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 4;
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Service card clicks
         function handleServiceClick(service) {
             const actions = {
                 'custom-routes': () => window.open('https://wa.me/972542347834?text=היי מיכל, אני מעוניין במסלול אישי'),
@@ -818,7 +1129,18 @@
                         behavior: 'smooth'
                     });
                 }
+                closeMenu();
             });
+        });
+
+        // Auto-close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('open');
+            }
         });
     </script>
 </body>
