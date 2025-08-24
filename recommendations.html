@@ -254,6 +254,7 @@
             box-shadow: 0 25px 70px rgba(139, 69, 19, 0.3);
         }
 
+        /* Image placeholder for background images */
         .recommendation-video {
             width: 100%;
             height: 280px;
@@ -265,6 +266,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             overflow: hidden;
+            /* This is where the background image will be placed */
+            background-size: cover;
+            background-position: center;
         }
 
         .recommendation-video:hover {
@@ -278,6 +282,9 @@
             gap: 20px;
             color: #666;
             text-align: center;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 15px;
         }
 
         .play-button {
@@ -559,7 +566,7 @@
         <div class="container">
             <div class="filter-tabs">
                 <div class="filter-tab active" onclick="showCategory('all', this)">🌟 כל ההמלצות</div>
-                <div class="filter-tab" onclick="showCategory('coffee', this)">☕ קפה ומאפיות</div>
+                <div class="filter-tab" onclick="showCategory('coffee', this)">☕ קפה וטבע</div>
                 <div class="filter-tab" onclick="showCategory('restaurants', this)">🍽️ מסעדות</div>
                 <div class="filter-tab" onclick="showCategory('nature', this)">🌲 טיולי טבע</div>
             </div>
@@ -571,7 +578,7 @@
         <div class="container">
             <!-- Coffee Category -->
             <div class="category-section" id="coffee">
-                <h2 class="section-title">☕ קפה ומאפיות</h2>
+                <h2 class="section-title">☕ קפה וטבע</h2>
                 <p class="section-subtitle">המקומות הכי טעימים לקפה וחוויה</p>
 
                 <div class="recommendations-grid">
@@ -581,8 +588,8 @@
                         <div class="recommendation-video" onclick="openVideo('https://youtu.be/0Nw2NlLbWeY?si=4yxvr9r-ixJBOjne')">
                             <div class="video-placeholder">
                                 <div class="play-button">▶️</div>
-                                <p><strong>לחצו לצפייה בסרטון</strong></p>
-                                <p>קפה לאגו בפתח תקווה</p>
+                                <p style="color: white;"><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p style="color: white;">קפה לאגו בפתח תקווה</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
@@ -607,8 +614,8 @@
                         <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/3P_rAzqC1EU?si=CQvYdVK9poKKuMSJ')">
                             <div class="video-placeholder">
                                 <div class="play-button">▶️</div>
-                                <p><strong>לחצו לצפייה בסרטון</strong></p>
-                                <p>עגלת קפה קרני חיטין</p>
+                                <p style="color: white;"><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p style="color: white;">עגלת קפה קרני חיטין</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
@@ -632,8 +639,8 @@
                         <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/3P_rAzqC1EU?si=6ZXgZQ6vLgg4Gp6h')">
                             <div class="video-placeholder">
                                 <div class="play-button">▶️</div>
-                                <p><strong>לחצו לצפייה בסרטון</strong></p>
-                                <p>בית קפה החורשה</p>
+                                <p style="color: white;"><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p style="color: white;">בית קפה החורשה</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
@@ -657,8 +664,8 @@
                         <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/6b9oLpZhh6s?si=6ghsy23aUWPCwdyl')">
                             <div class="video-placeholder">
                                 <div class="play-button">▶️</div>
-                                <p><strong>לחצו לצפייה בסרטון</strong></p>
-                                <p>עגלת קפה רחוב ירושלמי</p>
+                                <p style="color: white;"><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p style="color: white;">עגלת קפה רחוב ירושלמי</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
@@ -691,8 +698,8 @@
                         <div class="recommendation-video" onclick="openVideo('https://youtube.com/shorts/vi7q7jUPJ5w?si=Em_234VUQm89K2CX')">
                             <div class="video-placeholder">
                                 <div class="play-button">▶️</div>
-                                <p><strong>לחצו לצפייה בסרטון</strong></p>
-                                <p>פארק הדרים ברחובות</p>
+                                <p style="color: white;"><strong>לחצו לצפייה בסרטון</strong></p>
+                                <p style="color: white;">פארק הדרים ברחובות</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
@@ -718,8 +725,8 @@
                         <div class="recommendation-video">
                             <div class="video-placeholder">
                                 <div class="play-button" style="background: #888;">🌿</div>
-                                <p><strong>המלצות נוספות בקרוב</strong></p>
-                                <p>מקומות טבע נוספים</p>
+                                <p style="color: white;"><strong>המלצות נוספות בקרוב</strong></p>
+                                <p style="color: white;">מקומות טבע נוספים</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
@@ -749,8 +756,8 @@
                         <div class="recommendation-video">
                             <div class="video-placeholder">
                                 <div class="play-button" style="background: #888;">🍴</div>
-                                <p><strong>המלצות מסעדות בקרוב</strong></p>
-                                <p>המקומות הכי טעימים</p>
+                                <p style="color: white;"><strong>המלצות מסעדות בקרוב</strong></p>
+                                <p style="color: white;">המקומות הכי טעימים</p>
                             </div>
                         </div>
                         <div class="recommendation-content">
