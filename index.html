@@ -183,14 +183,25 @@
             text-decoration: none;
         }
 
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
 
-       .hero-section {
-    background: url('https://raw.githubusercontent.com/masasherut-netizen/michal-on-the-map/main/background.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 80px 20px;
-    text-align: center;
-    position: relative;
-}
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><path d="M0,150 Q250,100 500,150 T1000,150 L1000,300 L0,300 Z" fill="rgba(44,90,160,0.03)"/></svg>') bottom center no-repeat;
+            background-size: cover;
+        }
+
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
@@ -207,26 +218,21 @@
             display: block;
         }
 
-      .main-title {
-  font-size: 3.5em;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #ffffff; /* צבע לבן */
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* צל שחור עדין מאחורה */
-}
+        .main-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c5aa0;
+            letter-spacing: -1px;
+        }
 
-.slogan {
-  font-size: 1.5em;
-  font-weight: 400;
-  color: #f1f1f1; /* לבן רך יותר */
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.5); /* צל עדין */
-  font-style: italic; /* שיהיה קצת יותר מעניין */
-  letter-spacing: 1px; /* ריווח קל בין אותיות */
-  background: rgba(0,0,0,.2);
-  padding: 8px 14px;
-  border-radius: 9999px;
-  backdrop-filter: blur(2px); /* אם נתמך */
-}
+        .slogan {
+            font-size: 1.3em;
+            margin-bottom: 50px;
+            color: #5a6c7d;
+            font-weight: 400;
+            line-height: 1.5;
+        }
 
         .hero-cta {
             display: inline-flex;
@@ -311,8 +317,25 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 90, 160, 0.8);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
+        }
+
+        /* Individual slide backgrounds - ready for images */
+        .trip-slide:nth-child(1) {
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .trip-slide:nth-child(2) {
+            background-image: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .trip-slide:nth-child(3) {
+            background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .trip-slide:nth-child(4) {
+            background-image: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
         }
 
         .trip-slide-content {
@@ -816,7 +839,7 @@
             <img src="https://github.com/user-attachments/assets/189d8849-7864-46b5-b522-577b6b52989d" alt="מיכל על המפה" class="logo">
 
             <h1 class="main-title">מיכל על המפה</h1>
-            <p class="slogan">המסלול על המפה הקסם עלי</p>
+            <p class="slogan">המסלול על המפה והקסם עלי</p>
             
             <a href="contact.html" class="hero-cta">
                 <span>בואו נתכנן את הטיול הבא שלכם</span>
@@ -833,11 +856,10 @@
 
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="carouselTrack">
-                   <!-- Slide 1 - Vietnam -->
-<div class="trip-slide" 
-     style="background-image:url('https://raw.githubusercontent.com/masasherut-netizen/michal-on-the-map/main/trip-vietnam.jpg');">
-    <div class="trip-slide-content">
-        <h3 class="trip-slide-title">ויאטנם המדהימה</h3>
+                    <!-- Slide 1 - Vietnam -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">ויאטנם המדהימה</h3>
                             <p class="trip-slide-date">25 בנובמבר 2025 - שבועיים</p>
                             <p class="trip-slide-description">מסע מרתק בין צפון לדרום ויאטנם, עם כל האטרקציות החובה, מלונות איכותיים ובהדרכה של מיכל. קבוצה טובה ומגובשת מחכה לכם!</p>
                             <a href="https://wa.me/972542347834?text=היי מיכל! אני מעוניין בטיול לויאטנם ב-25.11.25" class="trip-slide-cta">
@@ -847,11 +869,10 @@
                         </div>
                     </div>
 
-                 <!-- Slide 2 - Bulgaria -->
-<div class="trip-slide" 
-     style="background-image:url('https://raw.githubusercontent.com/masasherut-netizen/michal-on-the-map/main/trip-bulgaria.jpg');">
-    <div class="trip-slide-content">
-        <h3 class="trip-slide-title">בולגריה הקסומה</h3>
+                    <!-- Slide 2 - Bulgaria (Sold Out) -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">בולגריה הקסומה</h3>
                             <p class="trip-slide-date">יולי 2025 - מלא!</p>
                             <p class="trip-slide-description">הטיול המדהים לבולגריה התמלא! שבוע מלא של הרפתקאות בהרי הבלקן המרהיבים עם תרבות עשירה וקולינריה מיוחדת.</p>
                             <a href="https://wa.me/972542347834?text=היי מיכל! רוצה לקבל עדכונים על טיולים דומים לבולגריה" class="trip-slide-cta">
@@ -861,11 +882,10 @@
                         </div>
                     </div>
 
-                  <!-- Slide 3 - Prague -->
-<div class="trip-slide" 
-     style="background-image:url('https://raw.githubusercontent.com/masasherut-netizen/michal-on-the-map/main/trip-praga.jpg');">
-    <div class="trip-slide-content">
-        <h3 class="trip-slide-title">טיול חורף מיוחד</h3>
+                    <!-- Slide 3 - Winter Trip -->
+                    <div class="trip-slide">
+                        <div class="trip-slide-content">
+                            <h3 class="trip-slide-title">טיול חורף מיוחד</h3>
                             <p class="trip-slide-date">פברואר 2026</p>
                             <p class="trip-slide-description">יעד חורפי מפתיע ומדהים עם חוויות ייחודיות לעונה. כל הפרטים יתפרסמו בקרוב. בהדרכה של מיכל.</p>
                             <a href="https://wa.me/972542347834?text=היי מיכל! רוצה לקבל עדכונים על הטיול החורפי" class="trip-slide-cta">
@@ -948,11 +968,11 @@
     <section class="about-section" id="about">
         <div class="container">
             <div class="about-content">
-              <div class="about-image">
-    <img src="https://raw.githubusercontent.com/masasherut-netizen/michal-on-the-map/main/michal-1.jpg.jpeg" 
-         alt="מיכל מדריכת טיולים" 
-         style="width: 320px; height: auto; border-radius: 16px; box-shadow: 0 8px 25px rgba(44, 90, 160, 0.1);">
-</div>
+                <div class="about-image">
+                    <div class="about-placeholder">
+                        <div style="font-size: 3em; color: #2c5aa0; margin-bottom: 15px;">👩‍🎓</div>
+                        <div style="color: #5a6c7d; font-weight: 500;">תמונה של מיכל</div>
+                    </div>
                 </div>
                 <div class="about-text">
                     <h2>מי אני?</h2>
