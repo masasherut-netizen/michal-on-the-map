@@ -301,13 +301,28 @@
 
         .trip-slide {
             min-width: 100%;
-            background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
             padding: 60px 40px;
             text-align: center;
             position: relative;
-            /* This is where background images will be placed */
             background-size: cover;
             background-position: center;
+        }
+
+        /* Individual slide backgrounds with gradients */
+        .trip-slide:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .trip-slide:nth-child(2) {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .trip-slide:nth-child(3) {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .trip-slide:nth-child(4) {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
         }
 
         .trip-slide::before {
@@ -317,25 +332,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
-        }
-
-        /* Individual slide backgrounds - ready for images */
-        .trip-slide:nth-child(1) {
-            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .trip-slide:nth-child(2) {
-            background-image: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-        }
-
-        .trip-slide:nth-child(3) {
-            background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-        }
-
-        .trip-slide:nth-child(4) {
-            background-image: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
         }
 
         .trip-slide-content {
