@@ -233,12 +233,19 @@
         }
 
         .slogan {
-            font-size: 1.4em;
+            font-size: 1.6em;
             margin-bottom: 50px;
             color: white;
-            font-weight: 600;
+            font-weight: 400;
             line-height: 1.5;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            background: linear-gradient(45deg, #fff, #f0f8ff, #e6f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-cta {
@@ -789,7 +796,11 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="nav-brand">
-                <div class="nav-logo">🗺️</div>
+                <!-- Try to show michal image, fallback to emoji -->
+                <div class="nav-logo">
+                    <img src="./logo-1.jpeg" alt="מ" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span style="display: none;">🗺️</span>
+                </div>
                 <span class="nav-brand-text">מיכל על המפה</span>
             </a>
             
@@ -955,7 +966,9 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <div class="about-placeholder">
+                    <img src="./logo-1.jpeg" alt="מיכל - מדריכת טיולים" style="width: 320px; height: 380px; border-radius: 16px; object-fit: cover; box-shadow: 0 8px 25px rgba(44, 90, 160, 0.2); border: 3px solid white;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <!-- Fallback placeholder if image doesn't load -->
+                    <div class="about-placeholder" style="display: none;">
                         <div style="font-size: 3em; color: #2c5aa0; margin-bottom: 15px;">👩‍🎓</div>
                         <div style="color: #5a6c7d; font-weight: 500;">תמונה של מיכל</div>
                     </div>
