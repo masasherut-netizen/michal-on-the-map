@@ -16,10 +16,10 @@
             line-height: 1.6;
             color: #2c3e50;
             background: #ffffff;
-            padding-top: 70px; /* Space for compact navbar */
+            padding-top: 70px;
         }
 
-        /* Compact Fixed Header & Navigation */
+        /* Fixed Header & Navigation */
         .navbar {
             background: linear-gradient(135deg, #2c5aa0 0%, #1e4176 100%);
             padding: 12px 0;
@@ -183,9 +183,12 @@
             text-decoration: none;
         }
 
-        /* Hero Section */
+        /* Hero Section with Background */
         .hero-section {
-            background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+            background: linear-gradient(135deg, rgba(248, 251, 255, 0.95) 0%, rgba(232, 244, 248, 0.95) 100%), url('./background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             padding: 80px 20px;
             text-align: center;
             position: relative;
@@ -198,7 +201,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><path d="M0,150 Q250,100 500,150 T1000,150 L1000,300 L0,300 Z" fill="rgba(44,90,160,0.03)"/></svg>') bottom center no-repeat;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><path d="M0,150 Q250,100 500,150 T1000,150 L1000,300 L0,300 Z" fill="rgba(44,90,160,0.05)"/></svg>') bottom center no-repeat;
             background-size: cover;
         }
 
@@ -214,8 +217,9 @@
             height: 160px;
             margin: 0 auto 40px;
             border-radius: 50%;
-            box-shadow: 0 8px 30px rgba(44, 90, 160, 0.2);
+            box-shadow: 0 8px 30px rgba(44, 90, 160, 0.3);
             display: block;
+            border: 4px solid rgba(255,255,255,0.8);
         }
 
         .main-title {
@@ -224,14 +228,16 @@
             margin-bottom: 20px;
             color: #2c5aa0;
             letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
         }
 
         .slogan {
-            font-size: 1.3em;
+            font-size: 1.4em;
             margin-bottom: 50px;
             color: #5a6c7d;
-            font-weight: 400;
+            font-weight: 500;
             line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
 
         .hero-cta {
@@ -260,7 +266,7 @@
         /* Trips Carousel Section */
         .trips-carousel-section {
             background: white;
-            padding: 60px 20px;
+            padding: 80px 20px;
             border-bottom: 1px solid #e8f0fe;
         }
 
@@ -271,7 +277,7 @@
 
         .carousel-title {
             text-align: center;
-            font-size: 2.5em;
+            font-size: 2.8em;
             font-weight: 700;
             color: #2c5aa0;
             margin-bottom: 20px;
@@ -279,153 +285,146 @@
 
         .carousel-subtitle {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #5a6c7d;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(44, 90, 160, 0.15);
+            width: 100%;
+        }
+
+        /* Trips Grid (Replaces Carousel) */
+        .trips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .trip-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
             box-shadow: 0 8px 30px rgba(44, 90, 160, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
+        .trip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(44, 90, 160, 0.2);
         }
 
-        .trip-slide {
-            min-width: 100%;
-            height: 300px;
-            padding: 60px 40px;
-            text-align: center;
+        .trip-card.featured {
+            border-color: #ff6b6b;
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.2);
+        }
+
+        .trip-card.sold-out {
+            opacity: 0.8;
+        }
+
+        .trip-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .trip-content {
+            padding: 25px;
+        }
+
+        .trip-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
             color: white;
         }
 
-        .trip-slide:nth-child(1) {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%), url('./trip-vietnam.jpg');
-            background-size: cover;
-            background-position: center;
+        .badge-hot {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            animation: pulse-badge 2s ease-in-out infinite;
         }
 
-        .trip-slide:nth-child(2) {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8) 0%, rgba(238, 90, 82, 0.8) 100%), url('./trip-bulgaria.jpg');
-            background-size: cover;
-            background-position: center;
+        .badge-sold-out {
+            background: #666;
         }
 
-        .trip-slide:nth-child(3) {
-            background: linear-gradient(135deg, rgba(116, 185, 255, 0.8) 0%, rgba(9, 132, 227, 0.8) 100%), url('./trip-praga.jpg');
-            background-size: cover;
-            background-position: center;
+        .badge-planning {
+            background: linear-gradient(45deg, #667eea, #764ba2);
         }
 
-        .trip-slide:nth-child(4) {
-            background: linear-gradient(135deg, rgba(253, 121, 168, 0.8) 0%, rgba(232, 67, 147, 0.8) 100%), url('./background.jpg');
-            background-size: cover;
-            background-position: center;
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .trip-slide-content {
-            max-width: 600px;
-        }
-
-        .trip-slide-title {
-            font-size: 2.2em;
+        .trip-title {
+            font-size: 1.5em;
             font-weight: 700;
-            margin-bottom: 12px;
+            color: #2c5aa0;
+            margin-bottom: 8px;
         }
 
-        .trip-slide-date {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .trip-slide-description {
+        .trip-date {
             font-size: 1em;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            opacity: 0.95;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
 
-        .trip-slide-cta {
+        .trip-description {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #5a6c7d;
+            margin-bottom: 20px;
+        }
+
+        .trip-cta {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255,255,255,0.2);
+            background: #2c5aa0;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 12px 20px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95em;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.3);
+            width: 100%;
+            justify-content: center;
         }
 
-        .trip-slide-cta:hover {
-            background: rgba(255,255,255,0.3);
+        .trip-cta:hover {
+            background: #1e4176;
+            transform: translateY(-1px);
             color: white;
             text-decoration: none;
         }
 
-        /* Carousel Navigation */
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5em;
-            color: #2c5aa0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            z-index: 10;
+        .trip-cta.secondary {
+            background: #666;
         }
 
-        .carousel-nav:hover {
-            background: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .carousel-prev {
-            left: 20px;
-        }
-
-        .carousel-next {
-            right: 20px;
-        }
-
-        /* Carousel Indicators */
-        .carousel-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .carousel-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(44, 90, 160, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-indicator.active {
-            background: #2c5aa0;
-            transform: scale(1.2);
+        .trip-cta.secondary:hover {
+            background: #555;
         }
 
         /* Services Section */
@@ -718,26 +717,26 @@
             }
 
             .carousel-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2em;
+                width: 45px;
+                height: 45px;
+                font-size: 1.4em;
             }
 
             .carousel-prev {
-                left: 10px;
+                left: 15px;
             }
 
             .carousel-next {
-                right: 10px;
+                right: 15px;
             }
 
             .trip-slide {
-                height: 250px;
-                padding: 30px 20px;
+                height: 280px;
+                padding: 40px 20px;
             }
 
             .trip-slide-title {
-                font-size: 1.8em;
+                font-size: 2em;
             }
             
             .main-title {
@@ -777,11 +776,15 @@
             .hero-section {
                 padding: 60px 20px;
             }
+
+            .carousel-title {
+                font-size: 2.2em;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Compact Fixed Navigation -->
+    <!-- Fixed Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="nav-brand">
@@ -818,12 +821,10 @@
         💬
     </a>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Background Image -->
     <section class="hero-section" id="home">
         <div class="hero-content">
-            <!-- תחליף את הקישור הזה בקישור לתמונה שלך -->
             <img src="./michal-1.jpg" alt="מיכל על המפה" class="logo">
-
             <h1 class="main-title">מיכל על המפה</h1>
             <p class="slogan">המסלול על המפה והקסם עלי</p>
             
@@ -834,78 +835,76 @@
         </div>
     </section>
 
-    <!-- Trips Carousel Section -->
+    <!-- Trips Section (No More Carousel - Simple Grid) -->
     <section class="trips-carousel-section">
         <div class="trips-carousel-container">
             <h2 class="carousel-title">הטיולים הקרובים</h2>
             <p class="carousel-subtitle">הזדמנויות מיוחדות למסעות בלתי נשכחים</p>
 
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="carouselTrack">
-                    <!-- Slide 1 - Vietnam -->
-                    <div class="trip-slide">
-                        <div class="trip-slide-content">
-                            <h3 class="trip-slide-title">ויאטנם המדהימה</h3>
-                            <p class="trip-slide-date">25 בנובמבר 2025 - שבועיים</p>
-                            <p class="trip-slide-description">מסע מרתק בין צפון לדרום ויאטנם, עם כל האטרקציות החובה, מלונות איכותיים ובהדרכה של מיכל</p>
-                            <a href="https://wa.me/972542347834?text=היי מיכל! אני מעוניין בטיול לויאטנם ב-25.11.25" class="trip-slide-cta">
-                                <span>רוצה להצטרף</span>
-                                <span>→</span>
-                            </a>
-                        </div>
+            <div class="trips-grid">
+                <!-- Vietnam Trip -->
+                <div class="trip-card featured">
+                    <div class="trip-image" style="background-image: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%), url('./trip-vietnam.jpg');">
+                        <div class="trip-badge badge-hot">נשארו מעט מקומות!</div>
                     </div>
-
-                    <!-- Slide 2 - Bulgaria -->
-                    <div class="trip-slide">
-                        <div class="trip-slide-content">
-                            <h3 class="trip-slide-title">בולגריה הקסומה</h3>
-                            <p class="trip-slide-date">יולי 2025 - מלא!</p>
-                            <p class="trip-slide-description">הטיול המדהים לבולגריה התמלא! שבוע מלא של הרפתקאות בהרי הבלקן המרהיבים</p>
-                            <a href="https://wa.me/972542347834?text=היי מיכל! רוצה עדכונים על טיולים דומים לבולגריה" class="trip-slide-cta">
-                                <span>עדכנו אותי</span>
-                                <span>→</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 - Winter Trip -->
-                    <div class="trip-slide">
-                        <div class="trip-slide-content">
-                            <h3 class="trip-slide-title">טיול חורף מיוחד</h3>
-                            <p class="trip-slide-date">פברואר 2026</p>
-                            <p class="trip-slide-description">יעד חורפי מפתיע ומדהים עם חוויות ייחודיות לעונה. כל הפרטים יתפרסמו בקרוב</p>
-                            <a href="https://wa.me/972542347834?text=היי מיכל! רוצה עדכונים על הטיול החורפי" class="trip-slide-cta">
-                                <span>רוצה עדכונים</span>
-                                <span>→</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Slide 4 - Passover Trip -->
-                    <div class="trip-slide">
-                        <div class="trip-slide-content">
-                            <h3 class="trip-slide-title">טיול פסח מיוחד</h3>
-                            <p class="trip-slide-date">אפריל 2026 - חופש פסח</p>
-                            <p class="trip-slide-description">חופשת פסח בלתי נשכחת ביעד מושלם לכל המשפחה עם תכנון מותאם לחגים</p>
-                            <a href="https://wa.me/972542347834?text=היי מיכל! אני מעוניין בטיול פסח 2026" class="trip-slide-cta">
-                                <span>רוצה פרטים</span>
-                                <span>→</span>
-                            </a>
-                        </div>
+                    <div class="trip-content">
+                        <h3 class="trip-title">ויאטנם המדהימה</h3>
+                        <p class="trip-date">25 בנובמבר 2025 - שבועיים</p>
+                        <p class="trip-description">מסע מרתק בין צפון לדרום ויאטנם, עם כל האטרקציות החובה, מלונות איכותיים ובהדרכה של מיכל</p>
+                        <a href="https://wa.me/972542347834?text=היי מיכל! אני מעוניין בטיול לויאטנם ב-25.11.25" class="trip-cta">
+                            <span>רוצה להצטרף</span>
+                            <span>→</span>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Carousel Navigation -->
-                <button class="carousel-nav carousel-prev" onclick="previousSlide()">‹</button>
-                <button class="carousel-nav carousel-next" onclick="nextSlide()">›</button>
-            </div>
+                <!-- Bulgaria Trip -->
+                <div class="trip-card sold-out">
+                    <div class="trip-image" style="background-image: linear-gradient(135deg, rgba(255, 107, 107, 0.8) 0%, rgba(238, 90, 82, 0.8) 100%), url('./trip-bulgaria.jpg');">
+                        <div class="trip-badge badge-sold-out">מלא!</div>
+                    </div>
+                    <div class="trip-content">
+                        <h3 class="trip-title">בולגריה הקסומה</h3>
+                        <p class="trip-date">יולי 2025</p>
+                        <p class="trip-description">הטיול המדהים לבולגריה התמלא! שבוע מלא של הרפתקאות בהרי הבלקן המרהיבים</p>
+                        <a href="https://wa.me/972542347834?text=היי מיכל! רוצה עדכונים על טיולים דומים לבולגריה" class="trip-cta secondary">
+                            <span>עדכנו אותי</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
 
-            <!-- Carousel Indicators -->
-            <div class="carousel-indicators">
-                <div class="carousel-indicator active" onclick="goToSlide(0)"></div>
-                <div class="carousel-indicator" onclick="goToSlide(1)"></div>
-                <div class="carousel-indicator" onclick="goToSlide(2)"></div>
-                <div class="carousel-indicator" onclick="goToSlide(3)"></div>
+                <!-- Winter Trip -->
+                <div class="trip-card planning">
+                    <div class="trip-image" style="background-image: linear-gradient(135deg, rgba(116, 185, 255, 0.8) 0%, rgba(9, 132, 227, 0.8) 100%), url('./trip-praga.jpg');">
+                        <div class="trip-badge badge-planning">בתכנון</div>
+                    </div>
+                    <div class="trip-content">
+                        <h3 class="trip-title">טיול חורף מיוחד</h3>
+                        <p class="trip-date">פברואר 2026</p>
+                        <p class="trip-description">יעד חורפי מפתיע ומדהים עם חוויות ייחודיות לעונה. כל הפרטים יתפרסמו בקרוב</p>
+                        <a href="https://wa.me/972542347834?text=היי מיכל! רוצה עדכונים על הטיול החורפי" class="trip-cta">
+                            <span>רוצה עדכונים</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Passover Trip -->
+                <div class="trip-card planning">
+                    <div class="trip-image" style="background-image: linear-gradient(135deg, rgba(253, 121, 168, 0.8) 0%, rgba(232, 67, 147, 0.8) 100%), url('./background.jpg');">
+                        <div class="trip-badge badge-planning">פרטים בקרוב</div>
+                    </div>
+                    <div class="trip-content">
+                        <h3 class="trip-title">טיול פסח מיוחד</h3>
+                        <p class="trip-date">אפריל 2026 - חופש פסח</p>
+                        <p class="trip-description">חופשת פסח בלתי נשכחת ביעד מושלם לכל המשפחה עם תכנון מותאם לחגים</p>
+                        <a href="https://wa.me/972542347834?text=היי מיכל! אני מעוניין בטיול פסח 2026" class="trip-cta">
+                            <span>רוצה פרטים</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1077,7 +1076,7 @@
             menu.classList.remove('open');
         }
 
-        // Carousel functionality
+        // Carousel functionality - COMPLETELY FIXED VERSION
         let currentSlide = 0;
         const totalSlides = 4;
 
@@ -1092,20 +1091,31 @@
         }
 
         function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateCarousel();
+            }
         }
 
         function updateCarousel() {
             const track = document.getElementById('carouselTrack');
             const indicators = document.querySelectorAll('.carousel-indicator');
             
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            if (!track) return; // Safety check
             
+            // Move the carousel track - each slide is 25% of track width
+            const translateValue = currentSlide * 25; // 0%, 25%, 50%, 75%
+            track.style.transform = `translateX(-${translateValue}%)`;
+            
+            // Update indicators
             indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentSlide);
+                if (indicator) {
+                    indicator.classList.toggle('active', index === currentSlide);
+                }
             });
         }
+
+        // Auto-play carousel removed as requested
 
         // Service card clicks
         function handleServiceClick(service) {
@@ -1144,6 +1154,11 @@
             if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
                 menu.classList.remove('open');
             }
+        });
+
+        // Initialize carousel on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCarousel();
         });
     </script>
 </body>
